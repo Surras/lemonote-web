@@ -13,6 +13,7 @@ export class Page {
 
     
     constructor(title: string, content: string){
-
+        this.title = title;
+        this.content = content;
     }
 }

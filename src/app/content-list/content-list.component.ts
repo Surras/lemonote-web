@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {PAGES } from '../mock-pages'
 
 @Component({
   selector: 'app-content-list',
@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class ContentListComponent implements OnInit {
 
   constructor() { }
+
+  pages = PAGES;
 
   ngOnInit() {
   }
