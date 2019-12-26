@@ -1,1 +1,1 @@
-<p *ngFor="let page of pages">{{page.title}}</p>
+<p *ngFor="let page of pages" (click)="onSelect(page)">{{page.title}}</p>

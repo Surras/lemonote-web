@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {PAGES } from '../mock-pages'
+import { PAGES } from '../mock-pages'
+import { Page } from '../models/page';
 
 @Component({
   selector: 'app-content-list',
@@ -13,6 +14,10 @@ export class ContentListComponent implements OnInit {
   pages = PAGES;
 
   ngOnInit() {
+  }
+
+  onSelect(page: Page){
+    console.log(page.title + " clicked!");
   }
 
 }
