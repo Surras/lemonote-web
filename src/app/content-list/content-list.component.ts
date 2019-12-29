@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { PAGES } from '../mock-pages'
 import { Page } from '../models/page';
 
@@ -9,14 +9,18 @@ import { Page } from '../models/page';
 })
 export class ContentListComponent implements OnInit {
 
-  constructor() { }
-
   pages = PAGES;
+
+  @Output()
+  selectedPage: Page;
+
+  constructor() { }
 
   ngOnInit() {
   }
 
-  onSelect(page: Page){
+  onSelect(page: Page) {
+    this.selectedPage = page;
     console.log(page.title + " clicked!");
   }
 

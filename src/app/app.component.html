@@ -11,10 +11,10 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-4 col-xl-2" id="scroll-col-left">
-      <app-content-list></app-content-list>
+      <app-content-list #contentList></app-content-list>
     </div>
     <div class="col-sm-8 col-xl-10 scroll-col" id="scroll-col-right">
-      <app-editor></app-editor>
+      <app-editor [page]="contentList.selectedPage"></app-editor>
     </div>    
   </div>
 </div>

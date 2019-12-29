@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Page } from './models/page';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'lemonote';
+
+  currentPage: Page;
 
   onLogout() {
     console.log("user logged out...");

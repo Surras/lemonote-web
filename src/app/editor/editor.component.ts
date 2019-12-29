@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Page } from '../models/page';
 
 @Component({
   selector: 'app-editor',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditorComponent implements OnInit {
 
+  @Input() 
+  page: Page;
+  
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onChanged(event: InputEvent){
+    
   }
 
 }
