@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Page } from '../models/page';
+import { PageService } from '../page.service';
 
 @Component({
   selector: 'app-editor',
@@ -8,12 +9,12 @@ import { Page } from '../models/page';
 })
 export class EditorComponent implements OnInit {
 
-  @Input() 
   page: Page;
   
-  constructor() { }
+  constructor(private pageService: PageService ) { }
 
   ngOnInit() {
+    this.pageService.currentPage.subscribe(page => this.page = page);
   }
 
   onChanged(event: InputEvent){

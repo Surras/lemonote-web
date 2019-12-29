@@ -1,6 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { PAGES } from '../mock-pages'
 import { Page } from '../models/page';
+import { PageService } from '../page.service';
 
 @Component({
   selector: 'app-content-list',
@@ -9,18 +10,24 @@ import { Page } from '../models/page';
 })
 export class ContentListComponent implements OnInit {
 
-  pages = PAGES;
+  pages = [];
 
-  @Output()
   selectedPage: Page;
 
-  constructor() { }
+  constructor(private pageService: PageService) { }
 
   ngOnInit() {
+    this.getPages();
+  }
+
+  getPages(): void {
+    this.pageService.getPages()
+    .subscribe(pages => this.pages = pages);
   }
 
   onSelect(page: Page) {
-    this.selectedPage = page;
+
+    this.pageService.currentPage.next(page);
     console.log(page.title + " clicked!");
   }
 
