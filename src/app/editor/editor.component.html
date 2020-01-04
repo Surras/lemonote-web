@@ -1,5 +1,7 @@
-<textarea *ngIf="page" placeholder="type something nice..." 
-[(ngModel)]="page.content"></textarea> 
- <!-- (input)="onChanged($event)"-->
+<div *ngIf="page">
+    <input [(ngModel)]="page.title" />
+    <textarea *ngIf="page" placeholder="type something nice..." 
+    [(ngModel)]="page.content"></textarea> 
+</div>
 
 <p *ngIf="!page">select or create a page!</p>
