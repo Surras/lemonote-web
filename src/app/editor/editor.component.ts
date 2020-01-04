@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormsModule } from "@angular/forms";
 import { Page } from '../models/page';
 import { PageService } from '../page.service';
 
@@ -10,6 +11,7 @@ import { PageService } from '../page.service';
 export class EditorComponent implements OnInit {
 
   page: Page;
+
   
   constructor(private pageService: PageService ) { }
 
@@ -17,8 +19,8 @@ export class EditorComponent implements OnInit {
     this.pageService.currentPage.subscribe(page => this.page = page);
   }
 
-  onChanged(event: InputEvent){
+  // onChanged(event: InputEvent){
     
-  }
+  // }
 
 }
