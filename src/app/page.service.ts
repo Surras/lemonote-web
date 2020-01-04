@@ -29,6 +29,7 @@ export class PageService {
   add(page: Page) {
     page.pageId = this.getMaxId(this.pages) + 1;
     page.title = "new Note " + page.pageId;
+    console.log("page added: " + page.title);
     this.pages.push(page);
   }
 
@@ -42,14 +43,14 @@ export class PageService {
           this.currentPage.next(null);
         }
         // try select the next comming page
-        else if (i < this.pages.length - 1) {
+        else if (i <= this.pages.length - 1) {
           this.currentPage.next(this.pages[i]);
         } 
         // select the previous page
         else {
           this.currentPage.next(this.pages[i - 1]);
         }
-
+        console.log("page deleted: " + page.title);
         break;
       }
     }
