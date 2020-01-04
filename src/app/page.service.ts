@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { PAGES } from './mock-pages'
 import { Page } from './models/page';
 import { Observable, of, Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +10,16 @@ export class PageService {
 
   currentPage: Subject<Page> = new Subject();
   currentPage$: Observable<Page>;
-
+  
+  private apiUrl = 'api/pages';  // URL to web api
   pages: Page[] = [];
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.currentPage$ = this.currentPage.asObservable();
   }
 
   getPages(): Observable<Page[]> {
-    this.pages = PAGES;
-    return of(this.pages);
+    return this.http.get<Page[]>(this.apiUrl);
   }
 
   update(page: Page) {
@@ -56,12 +56,7 @@ export class PageService {
     }
   }
 
-  private getMaxId(pages: Page[]): number {
-    let maxId: number = 0;
-    pages.forEach(item => {
-      if (item.pageId > maxId) maxId = item.pageId;
-    });
-
-    return maxId;
+  private getMaxId(pages: Page[]): number {    
+    return pages.length > 0 ? Math.max(...pages.map(page => page.pageId)) : 0;
   }
 }
