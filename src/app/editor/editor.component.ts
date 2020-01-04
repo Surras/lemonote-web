@@ -12,31 +12,26 @@ export class EditorComponent implements OnInit {
 
   page: Page;
   saveTimer;
-  
-  constructor(private pageService: PageService ) { }
+
+  constructor(private pageService: PageService) { }
 
   ngOnInit() {
-    this.pageService.currentPage.subscribe(page => 
-      {
-        // save current page before change
-        if(this.page){
-          // clear timer to avoid callback on new set page
-          clearTimeout(this.saveTimer);
-          this.updatePage(this.page);
-        }
-        this.page = page;
-      });
+    this.pageService.currentPage.subscribe(page => {
+      // save current page before change
+      if (this.page) {
+        // clear timer to avoid callback on new set page
+        clearTimeout(this.saveTimer);
+        this.pageService.update(this.page);
+      }
+      this.page = page;
+    });
   }
 
-  onChanged(event: InputEvent){
+  onChanged(event: InputEvent) {
     // clear active timer first to stop multiple calls
     clearTimeout(this.saveTimer);
 
     // start save timer for save-delay and bandwidth reduction
-    this.saveTimer = setTimeout(() => this.updatePage(this.page), 500);
-  }
-
-  updatePage(page: Page){
-    console.log(this.page.title + " saved!");
+    this.saveTimer = setTimeout(() => this.pageService.update(this.page), 500);
   }
 }

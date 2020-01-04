@@ -22,13 +22,23 @@ export class ContentListComponent implements OnInit {
 
   getPages(): void {
     this.pageService.getPages()
-    .subscribe(pages => this.pages = pages);
+    .subscribe(pages => {
+      this.pages = pages;
+    });
   }
 
   onSelect(page: Page) {
 
     this.pageService.currentPage.next(page);
+    this.selectedPage = page;
     console.log(page.title + " clicked!");
   }
 
+  newPage(){
+    this.pageService.add(new Page("new Note", ""));
+  }
+
+  deleteCurrentPage(){
+    this.pageService.delete(this.selectedPage);
+  }
 }
