@@ -1,0 +1,12 @@
+<div>
+    <button style="margin: 6px;" class="btn-outline-success" (click)="newPage()">
+        new
+    </button>
+
+    <button style="margin: 6px;" class="btn-outline-danger" (click)="deleteCurrentPage()">
+        delete
+    </button>
+</div>
+<p *ngFor="let page of pages" 
+[ngClass]="{selected: page == selectedPage}"
+(click)="onSelect(page)">{{page.title}}</p>
