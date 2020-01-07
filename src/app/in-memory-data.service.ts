@@ -14,4 +14,8 @@ export class InMemoryDataService {
 
     return {pages};
   }
+
+  genId(pages: Page[]): number {
+    return pages.length > 0 ? Math.max(...pages.map(page => page.pageId)) + 1 : 1;
+  }
 }

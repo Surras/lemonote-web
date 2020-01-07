@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { EditorComponent } from './editor/editor.component';
 import { ContentListComponent } from './content-list/content-list.component';
 
+const ENV = 'dev';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,12 +19,10 @@ import { ContentListComponent } from './content-list/content-list.component';
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,
-    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
-    // and returns simulated server responses.
-    // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    
+     ENV !== 'prod' && ENV !== 'remote' ? HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false } 
+    ): [],
   ],
   providers: [],
   bootstrap: [AppComponent]
