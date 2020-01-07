@@ -11,7 +11,7 @@ export class PageService {
   currentPage: Subject<Page> = new Subject();
   currentPage$: Observable<Page>;
   
-  private apiUrl = 'api/pages';  // URL to web api
+  private apiUrl = 'http://localhost:8080/api/pages';  // URL to web api
   pages: Page[] = [];
 
   constructor(private http: HttpClient) {
