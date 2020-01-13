@@ -1,5 +1,4 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { PAGES } from '../mock-pages'
 import { Page } from '../models/page';
 import { PageService } from '../page.service';
 
@@ -28,15 +27,24 @@ export class ContentListComponent implements OnInit {
       });
   }
 
-  onSelect(page: Page) {
+  onSelect(id: number) {
+    this.pageService.getPage(id).subscribe(
+      fetchedPage => {
+        this.pageService.currentPage.next(fetchedPage);
+        this.selectedPage = fetchedPage;
+      }
+    );
 
-    this.pageService.currentPage.next(page);
-    this.selectedPage = page;
-    console.log(page.title + " clicked!");
+    console.log(id + " clicked!");
   }
 
   newPage() {
-    this.pageService.add(new Page("new Note", ""));
+    this.pageService.add(new Page("new Note", "")).subscribe(
+      (newPage: Page) => {
+        if (newPage)
+          this.pages.push(newPage);
+      }
+    );
   }
 
   deleteCurrentPage() {

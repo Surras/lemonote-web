@@ -9,4 +9,4 @@
 </div>
 <p *ngFor="let page of pages" 
 [ngClass]="{selected: page == selectedPage}"
-(click)="onSelect(page)">{{page.title}}</p>
+(click)="onSelect(page.id)">{{page.title}}</p>

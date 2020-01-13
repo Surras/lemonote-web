@@ -32,6 +32,6 @@ export class EditorComponent implements OnInit {
     clearTimeout(this.saveTimer);
 
     // start save timer for save-delay and bandwidth reduction
-    this.saveTimer = setTimeout(() => this.pageService.update(this.page), 500);
+    this.saveTimer = setTimeout(() => this.pageService.update(this.page).subscribe(), 500);
   }
 }

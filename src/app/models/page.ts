@@ -1,5 +1,5 @@
 export class Page {
-    pageId: number;
+    id: number;
     title: string;
     content: string;
     createdAt: Date;
@@ -12,8 +12,9 @@ export class Page {
     category: number;
 
     
-    constructor(title: string, content: string){
+    constructor(title: string, content: string, id?: number){
         this.title = title;
         this.content = content;
+        this.id = id;
     }
 }
