@@ -21,7 +21,7 @@ const ENV = 'dev';
     BrowserModule, FormsModule, HttpClientModule,
     
      ENV !== 'prod' && ENV !== 'remote' ? HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false } 
+      InMemoryDataService, { dataEncapsulation: false, delay: 100 } 
     ): [],
   ],
   providers: [],

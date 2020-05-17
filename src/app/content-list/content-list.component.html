@@ -7,6 +7,6 @@
         delete
     </button>
 </div>
-<p *ngFor="let page of pages" 
+<p *ngFor="let page of pageService.pages" 
 [ngClass]="{selected: page == selectedPage}"
 (click)="onSelect(page.id)">{{page.title}}</p>

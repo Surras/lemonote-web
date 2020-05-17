@@ -17,17 +17,21 @@ export class EditorComponent implements OnInit {
 
   ngOnInit() {
     this.pageService.currentPage.subscribe(page => {
-      // save current page before change
+      // save current page before change, if one is selected
       if (this.page) {
         // clear timer to avoid callback on new set page
         clearTimeout(this.saveTimer);
         this.pageService.update(this.page);
       }
+
+      // set new selected page
       this.page = page;
     });
   }
 
+  
   onChanged(event: InputEvent) {
+    let s = "";
     // clear active timer first to stop multiple calls
     clearTimeout(this.saveTimer);
 

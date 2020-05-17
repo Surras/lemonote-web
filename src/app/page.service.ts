@@ -32,21 +32,28 @@ export class PageService {
 
   getPages(): Observable<Page[]> {
     return this.http.get<Page[]>(this.apiUrl).pipe(
-      tap(_ => console.log('fetched pages')),
+      tap(_ => {
+        console.log('fetched pages');
+        this.pages = _;
+      }),
       catchError(this.handleError<Page[]>('getPages', []))
     );
   }
 
   update(page: Page): Observable<any> {
     return this.http.put<Page>(this.apiUrl, page, this.httpOptions).pipe(
-      tap(_ => console.log(`update page ${page.id}`)),
+      tap(_ => {
+        console.log(`update page ${page.id}`);
+      }),
       catchError(this.handleError<any>('update'))
     );
   }
 
   add(page: Page): Observable<Page> {
     return this.http.post<Page>(this.apiUrl, page, this.httpOptions).pipe(
-      tap((newPage: Page) => console.log(`post new page created, id: ${newPage.id}`)),
+      tap((newPage: Page) => {console.log(`post new page created, id: ${newPage.id}`);
+    this.pages.push(newPage);
+    }),
       catchError(this.handleError<Page>('add'))
     );
   }

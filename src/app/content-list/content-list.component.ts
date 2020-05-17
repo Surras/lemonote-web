@@ -9,13 +9,14 @@ import { PageService } from '../page.service';
 })
 export class ContentListComponent implements OnInit {
 
-  pages = [];
+  //pages = [];
 
   selectedPage: Page;
 
   constructor(private pageService: PageService) { }
 
   ngOnInit() {
+    // this.pages = this.pageService.pages;
     this.getPages();
     this.pageService.currentPage.subscribe(page => this.selectedPage = page);
   }
@@ -23,7 +24,7 @@ export class ContentListComponent implements OnInit {
   getPages(): void {
     this.pageService.getPages()
       .subscribe(pages => {
-        this.pages = pages;
+        //this.pages = pages;
       });
   }
 
@@ -41,8 +42,8 @@ export class ContentListComponent implements OnInit {
   newPage() {
     this.pageService.add(new Page("new Note", "")).subscribe(
       (newPage: Page) => {
-        if (newPage)
-          this.pages.push(newPage);
+        // if (newPage)
+        //   this.pages.push(newPage);
       }
     );
   }
