@@ -9,8 +9,6 @@ import { AppComponent } from './app.component';
 import { EditorComponent } from './editor/editor.component';
 import { ContentListComponent } from './content-list/content-list.component';
 
-const ENV = 'dev';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,9 +18,9 @@ const ENV = 'dev';
   imports: [
     BrowserModule, FormsModule, HttpClientModule,
     
-     ENV !== 'prod' && ENV !== 'remote' ? HttpClientInMemoryWebApiModule.forRoot(
+     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false, delay: 100 } 
-    ): [],
+    )     
   ],
   providers: [],
   bootstrap: [AppComponent]
