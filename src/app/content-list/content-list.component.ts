@@ -13,7 +13,7 @@ export class ContentListComponent implements OnInit {
 
   selectedPage: Page;
 
-  constructor(private pageService: PageService) { }
+  constructor(public pageService: PageService) { }
 
   ngOnInit() {
     // this.pages = this.pageService.pages;
