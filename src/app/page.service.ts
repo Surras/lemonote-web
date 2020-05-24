@@ -12,6 +12,9 @@ export class PageService {
   currentPage: Subject<Page> = new Subject();
   currentPage$: Observable<Page>;
 
+  pageList: Subject<Page[]> = new Subject();
+  pageList$: Observable<Page[]>;
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -20,14 +23,22 @@ export class PageService {
 
   constructor(private http: HttpClient) {
     this.currentPage$ = this.currentPage.asObservable();
+    this.pageList$ = this.pageList.asObservable();
   }
 
   getPage(pageId: number): Observable<Page> {
-    const url = `${this.apiUrl}/${pageId}`;
-    return this.http.get<Page>(url).pipe(
-      tap(_ => console.log('single page fetched')),
-      catchError(this.handleError<Page>('getPage'))
-    );
+    for (let i = 0; i < this.pages.length; i++) {
+      if (this.pages[i].id == pageId)
+        return of(this.pages[i]);
+    }
+
+    return of(null);
+
+    // const url = `${this.apiUrl}/${pageId}`;
+    // return this.http.get<Page>(url).pipe(
+    //   tap(_ => console.log('single page fetched')),
+    //   catchError(this.handleError<Page>('getPage'))
+    // );
   }
 
   getPages(): Observable<Page[]> {
@@ -35,6 +46,7 @@ export class PageService {
       tap(_ => {
         console.log('fetched pages');
         this.pages = _;
+        this.pageList.next(_);
       }),
       catchError(this.handleError<Page[]>('getPages', []))
     );
@@ -44,6 +56,8 @@ export class PageService {
     return this.http.put<Page>(this.apiUrl, page, this.httpOptions).pipe(
       tap(_ => {
         console.log(`update page ${page.id}`);
+        this.currentPage.next(page);
+        this.pageList.next(this.pages);
       }),
       catchError(this.handleError<any>('update'))
     );
@@ -51,9 +65,10 @@ export class PageService {
 
   add(page: Page): Observable<Page> {
     return this.http.post<Page>(this.apiUrl, page, this.httpOptions).pipe(
-      tap((newPage: Page) => {console.log(`post new page created, id: ${newPage.id}`);
-    this.pages.push(newPage);
-    }),
+      tap((newPage: Page) => {
+        console.log(`post new page created, id: ${newPage.id}`);
+        this.pages.push(newPage);
+      }),
       catchError(this.handleError<Page>('add'))
     );
   }

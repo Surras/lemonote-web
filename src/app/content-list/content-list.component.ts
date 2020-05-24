@@ -9,7 +9,7 @@ import { PageService } from '../page.service';
 })
 export class ContentListComponent implements OnInit {
 
-  //pages = [];
+  pages = [];
 
   selectedPage: Page;
 
@@ -17,8 +17,9 @@ export class ContentListComponent implements OnInit {
 
   ngOnInit() {
     // this.pages = this.pageService.pages;
-    this.getPages();
     this.pageService.currentPage.subscribe(page => this.selectedPage = page);
+    this.pageService.pageList.subscribe(list => this.pages = list);
+    this.getPages();
   }
 
   getPages(): void {
