@@ -56,8 +56,6 @@ export class PageService {
     return this.http.put<Page>(this.apiUrl, page, this.httpOptions).pipe(
       tap(_ => {
         console.log(`update page ${page.id}`);
-        this.currentPage.next(page);
-        this.pageList.next(this.pages);
       }),
       catchError(this.handleError<any>('update'))
     );
@@ -67,6 +65,8 @@ export class PageService {
     return this.http.post<Page>(this.apiUrl, page, this.httpOptions).pipe(
       tap((newPage: Page) => {
         console.log(`post new page created, id: ${newPage.id}`);
+
+        // push to local data
         this.pages.push(newPage);
       }),
       catchError(this.handleError<Page>('add'))

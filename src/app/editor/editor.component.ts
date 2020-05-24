@@ -18,11 +18,11 @@ export class EditorComponent implements OnInit {
   ngOnInit() {
     this.pageService.currentPage.subscribe(page => {
       // save current page before change, if one is selected
-      // if (this.page) {
-      //   // clear timer to avoid callback on new set page
-      //   clearTimeout(this.saveTimer);
-      //   // this.pageService.update(this.page);
-      // }
+      if (this.page) {
+        // clear timer to avoid callback on new set page
+        clearTimeout(this.saveTimer);
+        this.pageService.update(this.page).subscribe();
+      }
 
       // set new selected page
       this.page = page;
@@ -35,6 +35,6 @@ export class EditorComponent implements OnInit {
     clearTimeout(this.saveTimer);
 
     // start save timer for save-delay and bandwidth reduction
-    // this.saveTimer = setTimeout(() => this.pageService.update(this.page).subscribe(), 500);
+    this.saveTimer = setTimeout(() => this.pageService.update(this.page).subscribe(), 500);
   }
 }

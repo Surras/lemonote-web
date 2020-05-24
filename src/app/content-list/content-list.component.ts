@@ -19,14 +19,7 @@ export class ContentListComponent implements OnInit {
     // this.pages = this.pageService.pages;
     this.pageService.currentPage.subscribe(page => this.selectedPage = page);
     this.pageService.pageList.subscribe(list => this.pages = list);
-    this.getPages();
-  }
-
-  getPages(): void {
-    this.pageService.getPages()
-      .subscribe(pages => {
-        //this.pages = pages;
-      });
+    this.pageService.getPages();
   }
 
   onSelect(id: number) {
@@ -41,12 +34,7 @@ export class ContentListComponent implements OnInit {
   }
 
   newPage() {
-    this.pageService.add(new Page("new Note", "")).subscribe(
-      (newPage: Page) => {
-        // if (newPage)
-        //   this.pages.push(newPage);
-      }
-    );
+    this.pageService.add(new Page("new Note", "")).subscribe();
   }
 
   deleteCurrentPage() {
